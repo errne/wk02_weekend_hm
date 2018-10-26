@@ -1,3 +1,4 @@
+require_relative('./song')
 class Guest
 
 attr_reader :name
@@ -18,6 +19,10 @@ attr_reader :name
 
   def get_favourite_tune()
     return @favourite_tune
+  end
+
+  def cheer_loudly()
+    return "Hell Yeah"
   end
 
 end

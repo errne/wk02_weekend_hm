@@ -4,7 +4,10 @@ require_relative('../guest')
 require_relative('../song')
 
 class GuestTest < Minitest::Test
-  @favourite = Song.new("One")
+
+  def setup
+    @favourite = Song.new("One")
+  end
 
   def test_guest_has_name
     guest1 = Guest.new("Vidal", 120, @favourite)
@@ -24,6 +27,14 @@ class GuestTest < Minitest::Test
 
   def test_guest_has_favourite_song
     guest2 = Guest.new("Pavaroti", 225, @favourite)
+    assert_equal("One", guest2.get_favourite_tune().title)
   end
+
+  def test_guest_can_cheer_loudly
+    guest1 = Guest.new("Vidal", 120, @favourite)
+    assert_equal("Hell Yeah", guest1.cheer_loudly())
+  end
+
+
 
 end
