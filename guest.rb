@@ -2,9 +2,10 @@ class Guest
 
 attr_reader :name
 
-  def initialize(name, wallet)
+  def initialize(name, wallet, favourite_tune)
     @name = name
     @wallet = wallet
+    @favourite_tune = favourite_tune
   end
 
   def check_wallet()
@@ -13,6 +14,10 @@ attr_reader :name
 
   def pay_fee(fee)
     @wallet -= fee
+  end
+
+  def get_favourite_tune()
+    return @favourite_tune
   end
 
 end

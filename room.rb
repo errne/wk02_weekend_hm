@@ -12,6 +12,7 @@ class Room
   end
 
   def add_guest(guest)
+    return "Sorry, the room is full" unless count_spaces_left > 0
     @guests << guest
   end
 
