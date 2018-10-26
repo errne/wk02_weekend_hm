@@ -23,6 +23,13 @@ class GuestTest < Minitest::Test
     guest2 = Guest.new("Pavaroti", 225, @favourite)
     guest2.pay_fee(25)
     assert_equal(200, guest2.check_wallet)
+    assert_equal(25, guest2.pay_fee(25))
+  end
+
+  def test_guest_can_pay_fee__not_enough_funds
+    guest2a = Guest.new("Pavaro", 14, @favourite)
+    assert_equal("Sorry", guest2a.pay_fee(15))
+    assert_equal(14, guest2a.check_wallet)
   end
 
   def test_guest_has_favourite_song

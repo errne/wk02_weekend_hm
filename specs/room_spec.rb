@@ -18,9 +18,11 @@ class RoomTest < Minitest::Test
 
     @guest1 = Guest.new("Bo", 45, song4)
     @guest2 = Guest.new("Stu", 68, song1)
+    @guest3 = Guest.new("Pooh", 14, song1)
 
     @room1 = Room.new("Rock room", 15, songslist)
     @room2 = Room.new("Awful music room", 1, songslist)
+
 
   end
 
@@ -70,8 +72,38 @@ class RoomTest < Minitest::Test
     @room1.add_song(@song5)
     assert_equal(5 , @room1.songslist.length)
     assert_equal("Crazy", @room1.songslist[4].title)
-
   end
+
+  def test_guests_can_cheer
+    assert_equal("Hell Yeah", @room1.check_feedback(@guest1))
+  end
+
+  def test_room_has_till
+    assert_equal(25, @room1.check_till())
+  end
+
+  # def test_room_can_accept_entry_fee
+  #   @room1.charge_entry_fee(@guest1)
+  #   assert_equal(40, @room1.check_till())
+  #   assert_equal(30, @guest1.check_wallet)
+  # end
+
+  # def test_room_can_accept_entry_fee__guest_accepected_in
+  #   @room1.charge_entry_fee(@guest1)
+  #   assert_equal(1, @room1.guest_count())
+  #   assert_equal(14, @room1.count_spaces_left)
+  #   assert_equal(40, @room1.check_till())
+  #   assert_equal(30, @guest1.check_wallet)
+  # end
+
+  def test_room_can_accept_entry_fee__guest_no_money
+    @room1.charge_entry_fee(@guest3)
+    assert_equal(0, @room1.guest_count())
+    assert_equal(25, @room1.check_till())
+    assert_equal(14, @guest3.check_wallet)
+    assert_equal("Bye", @room1.charge_entry_fee(@guest3))
+  end
+
 
 
 end

@@ -1,4 +1,5 @@
 require_relative ('./guest')
+require('pry')
 
 class Room
 
@@ -8,6 +9,8 @@ class Room
     @theme = theme
     @capacity = capacity
     @songslist = songslist
+    @entry_fee = 15
+    @till = 25
     @guests = []
   end
 
@@ -30,6 +33,24 @@ class Room
 
   def add_song(song)
     @songslist << song
+  end
+
+  def check_feedback(guest)
+    guest.cheer_loudly if @songslist.find { | song | guest.get_favourite_tune == song }
+  end
+
+  def check_till()
+    return @till
+  end
+
+  def charge_entry_fee(guest)
+    return "Sorry, the room is full" unless count_spaces_left > 0
+    if guest.pay_fee(@entry_fee) == "Sorry"
+      return "Bye"
+    else
+      @till += guest.pay_fee(@entry_fee)
+      add_guest(guest)
+    end
   end
 
 end

@@ -14,7 +14,9 @@ attr_reader :name
   end
 
   def pay_fee(fee)
+    return "Sorry" unless @wallet >= fee
     @wallet -= fee
+    return fee
   end
 
   def get_favourite_tune()
@@ -24,5 +26,6 @@ attr_reader :name
   def cheer_loudly()
     return "Hell Yeah"
   end
+
 
 end
