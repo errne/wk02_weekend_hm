@@ -84,16 +84,20 @@ class RoomTest < Minitest::Test
 
   def test_room_can_accept_entry_fee
     @room1.charge_entry_fee(@guest1)
-    assert_equal(40, @room1.check_till())
-    assert_equal(30, @guest1.check_wallet)
-  end
-
-  def test_room_can_accept_entry_fee__guest_accepected_in
-    @room1.charge_entry_fee(@guest1)
     assert_equal(1, @room1.guest_count())
     assert_equal(14, @room1.count_spaces_left)
     assert_equal(40, @room1.check_till())
     assert_equal(30, @guest1.check_wallet)
+  end
+
+  def test_room_can_accept_entry_fee__room_full
+    @room2.charge_entry_fee(@guest1)
+    @room2.charge_entry_fee(@guest2)
+    assert_equal(1, @room2.guest_count())
+    assert_equal(0, @room2.count_spaces_left)
+    assert_equal(40, @room2.check_till())
+    assert_equal(30, @guest1.check_wallet)
+    assert_equal(68, @guest2.check_wallet)
   end
 
   def test_room_can_accept_entry_fee__guest_no_money
