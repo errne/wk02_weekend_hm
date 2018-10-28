@@ -48,7 +48,7 @@ class Room
     if guest.pay_fee(@entry_fee) == "Sorry"
       return "Bye"
     else
-      @till += guest.pay_fee(@entry_fee)
+      @till += @entry_fee
       add_guest(guest)
     end
   end
