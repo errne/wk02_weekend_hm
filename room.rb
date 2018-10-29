@@ -9,8 +9,8 @@ class Room
     @theme = theme
     @capacity = capacity
     @songslist = songslist
-    @entry_fee = 15
-    @till = 25
+    @entry_fee = 15.0
+    @till = 25.0
     @guests = []
   end
 
